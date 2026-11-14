@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mimpi - daytime companion, nighttime hive-mind (proposal)</title>
+<style>
+  body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:820px;margin:0 auto;padding:24px 16px;color:#1c2833;line-height:1.55}
+  h1{font-size:1.6rem;margin-bottom:0.2rem}
+  h2{font-size:1.15rem;margin-top:2rem;border-bottom:1px solid #d5dbdb;padding-bottom:4px}
+  .badge{display:inline-block;background:#8e44ad;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.75rem;vertical-align:middle;margin-left:8px}
+  .note{background:#f4ecf7;border-left:4px solid #8e44ad;padding:10px 14px;border-radius:0 4px 4px 0;font-size:0.92rem}
+  pre{background:#f4f6f6;padding:12px;border-radius:6px;overflow-x:auto;font-size:0.88rem}
+  img{max-width:100%;border:1px solid #d5dbdb;border-radius:6px;margin:8px 0}
+  a{color:#2980b9}
+  footer{margin-top:2.5rem;font-size:0.82rem;color:#7f8c8d;border-top:1px solid #d5dbdb;padding-top:12px}
+</style>
+</head>
+<body>
+<h1>mimpi <span class="badge">unverified proposal - idea stage</span></h1>
+<p>Research notes for a desktop AI companion that runs local inference on a
+consumer GPU by day and trains a shared DiLoCo + LoRA "hive-mind" adapter while
+the PC is idle. The Gemini-authored proposal and an independent feasibility
+review live in the <a href="https://github.com/irvan-putra/mimpi">GitHub
+repository</a>.</p>
+
+<h2>What runs where</h2>
+<p class="note">This page is a static overview. The chart below comes from
+<code>hive_sim.py</code>, a <strong>toy simulation that runs locally with
+Python</strong> on synthetic data. Nothing runs in your browser, no real training
+happens, and the simulation is not a measurement of the proposed system.</p>
+
+<h2>Run it yourself</h2>
+<pre>git clone https://github.com/irvan-putra/mimpi.git
+cd mimpi
+python3 -m pip install numpy matplotlib   # numpy for the sim, matplotlib for --viz
+python3 hive_sim.py --seeds 7,11,23   # text report
+python3 hive_sim.py --viz hive_sim.png # accuracy chart (needs matplotlib)</pre>
+<p>Tune the swarm with <code>--clients</code>, <code>--byzantine</code>,
+<code>--rounds</code>, <code>--inner-steps</code>, <code>--seeds</code>,
+<code>--rotation-range</code>.</p>
+
+<h2>Visual results</h2>
+<a href="assets/hive_sim.png"><img src="assets/hive_sim.png" alt="Toy simulation: naive averaging collapses under two adversarial clients while trimmed mean with a cosine filter holds accuracy"></a>
+<p style="font-size:0.8rem;color:#7f8c8d;margin-top:0">tap the image to open it full size</p>
+<p>In this toy run (12 synthetic clients, 2 adversarial sending inverted
+updates, 3 fixed seeds, two independent trajectories with matched minibatch
+draws), naive mean aggregation ends at 0.21 mean held-out accuracy while the
+trimmed mean with a cosine filter ends at 0.97 (band shows min-max across
+seeds). Two honest counterpoints are one flag away: with no attack at all the
+two strategies are identical (<code>--byzantine 0</code>: 0.98 vs 0.98 - the
+defense neither helps nor hurts), and under extreme data heterogeneity both
+degrade together (<code>--rotation-range 3.0</code>: ~0.73 each) - the filter
+no longer helps. The reading: aggregation <em>mechanics matter</em> - but this
+is a linear model on 2D synthetic data, one attack type, not evidence of
+general robustness. The review's core open problem (merging real LoRA factors
+across heterogeneous clients) is untouched and remains research, not
+engineering.</p>
+
+<h2>Status and caveats</h2>
+<p>There is no implementation, installer, or benchmark of the actual companion.
+The proposal's numbers (VRAM budgets, checkpoint latency, payload sizes) are
+design targets; see <code>feasibility-review.md</code> for what is established,
+plausible, or optimistic. The proposal text is attributed to Google Gemini.</p>
+
+<footer>Proposal and toy simulation. No license selected.</footer>
+</body>
+</html>
