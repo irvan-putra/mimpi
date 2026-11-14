@@ -29,3 +29,24 @@ Idea stage. The sensible first milestone, per the review, is a single-machine
 prototype testing the two most consequential local claims: preemption and resume
 latency, and peak QLoRA VRAM on the actual GPU. No federated infrastructure exists
 or is running.
+
+## Runnable prototype
+
+`hive_sim.py` is a toy simulation of the federated aggregation loop: a few
+synthetic clients train tiny local deltas, compress them (Top-K + 8-bit, as
+the proposal sketches), and a coordinator aggregates with a naive mean versus
+a trimmed mean plus cosine-similarity filter, while some clients send
+inverted updates. It demonstrates aggregation mechanics on synthetic data;
+it is not a measurement of the proposed system and does not touch the open
+LoRA-merging research problem described in `feasibility-review.md`.
+
+    python3 hive_sim.py                    # text report (needs numpy)
+    python3 hive_sim.py --viz hive_sim.png # accuracy chart (needs matplotlib)
+
+See `TESTING.md` for verified commands, dependencies, and known limits.
+
+## Project site
+
+When GitHub Pages is enabled (from `docs/`), an overview site with run
+instructions and the generated chart is at
+https://irvan-putra.github.io/mimpi/ .
