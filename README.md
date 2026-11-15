@@ -55,7 +55,3 @@ https://irvan-putra.github.io/mimpi/ .
 
 Suggestion, not a commitment or a result: leave it as a simulation until
 there is a specific GPU and a small experiment to test on it.
-
-Across the four sibling repos (gotong, mimpi, anyam, jejak): choose just
-one next rather than abandoning the others; jejak is the suggested first
-pick as the clearest, lowest-commitment test.
