@@ -50,3 +50,12 @@ See `TESTING.md` for verified commands, dependencies, and known limits.
 When GitHub Pages is enabled (from `docs/`), an overview site with run
 instructions and the generated chart is at
 https://irvan-putra.github.io/mimpi/ .
+
+## Suggested next experiment (15 Nov 2026)
+
+Suggestion, not a commitment or a result: leave it as a simulation until
+there is a specific GPU and a small experiment to test on it.
+
+Across the four sibling repos (gotong, mimpi, anyam, jejak): choose just
+one next rather than abandoning the others; jejak is the suggested first
+pick as the clearest, lowest-commitment test.
