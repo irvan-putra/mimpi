@@ -55,3 +55,7 @@ https://irvan-putra.github.io/mimpi/ .
 
 Suggestion, not a commitment or a result: leave it as a simulation until
 there is a specific GPU and a small experiment to test on it.
+
+---
+
+Built with AI assistance (Instinct and others). Not everything has been reviewed by Irvan.
