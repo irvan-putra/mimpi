@@ -1,0 +1,5 @@
+# Core simulation dependency (Python 3.9+; see TESTING.md)
+numpy>=1.21
+
+# Optional, only needed for: python3 hive_sim.py --viz out.png
+# matplotlib>=3.5
